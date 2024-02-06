@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0; 
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        section.Main-Section{
+            height: 100vh;
+            width: 100%;
+            background-color: #0a9196;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .Main-Section .Content-Wrapper{
+            width: 40%;
+            height:55vh;
+            padding: 40px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: space;
+            justify-content: space-evenly;
+            border-radius:5px;
+        }
+        
+        .Main-Section .Content-Wrapper span{
+            padding: 10px 5px;
+            font-size: 1.5rem;
+            width:100%;
+            border-bottom: 1px solid #ddd;
+        }
+        .Main-Section .Content-Wrapper form{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            padding: 20px;
+        }
+        .Main-Section .Content-Wrapper form label{
+            font-size:clamp(1rem,10vw,1rem);
+            padding: 10px 0;
+            font-weight: 500;
+        }
+        .Main-Section .Content-Wrapper form input, .Main-Section .Content-Wrapper form select{
+            width: 30vw;
+            padding:10px;
+            border-radius: 0;
+            border: 1px solid #888;
+            background-color: #ddd;
+            font-size: 1rem;
+            border-radius: 4px;
+        }
+        .Main-Section .Content-Wrapper form input:focus{
+            border: 1px solid #1a42f8;
+            outline: none;
+        }
+        .Main-Section .Content-Wrapper form input.Submit{
+            width: 15vw;
+            background-color: #0a9196;
+            color:#fff;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 15px;
+            transition: all 0.3s linear;
+        }
+        .Main-Section .Content-Wrapper form input.Submit:hover{
+            color:#555;
+            background-color: #ccc;
+            transition: all 0.3s ease;
+        }
+        .Main-Section .Content-Wrapper form .Error-Message{
+            color:#f00;
+            font-size:clamp(0.3rem,3vw,1rem);
+            text-align: center;
+            border: none;
+        }
+        .Submit-Signin{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .Submit-Signin p{
+            padding-top: 10px;
+            padding-left: 10px;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <section class="Main-Section">
+        <div class="Content-Wrapper">
+            <span>Sign in</span>
+            <form onsubmit="return Form_Validation()" >
+                <label for="Name">Name</label>
+                <input type="text" name="Name" id="Name">
+
+                <label for="Password">Password</label>
+                <input type="password" name="Password" id="Password">
+
+                <span class="Error-Message" id="Error-Message"></span>
+                <div class="Submit-Signin">
+                    <input type="submit" value="Submit" class="Submit">
+                    <p>New Here <a href="./Sign_up.html">Sign up</a></p>
+                </div>
+            </form>
+            
+        </div>
+    </section>
+    <script>
+        window.onload=()=>{
+             if(sessionStorage.getItem("Signed_in")){window.location.replace("./index.html")}
+        }
+        function Form_Validation()
+        {
+            debugger;
+            var Name=document.getElementById("Name").value;
+            var Password=document.getElementById("Password").value;
+            var Error_Message=document.getElementById("Error-Message");
+            const Users_Table=JSON.parse(localStorage.getItem('Users'));
+            let User_Id="";
+            try{
+                if(!Users_Table){throw "Not Registered Yet";}
+                Users_Table.forEach(element => {
+                    if(element.Name===Name)
+                    {
+                        if(element.Password === Password)
+                        {
+                            if(element.Position==="Manager"){
+                                sessionStorage.setItem("Manager",true);
+                            }else if(element.Position==="Team Lead"){
+                                sessionStorage.setItem("Team Lead",true);
+                            }
+                            User_Id=element.User_Id;
+                            sessionStorage.setItem("Signed_in",User_Id);
+                            window.location.replace("./index.html");
+                        }
+                        throw "Wrong Password";
+                    }
+                });
+                throw "Worng User Name or Password";
+            }catch(error){
+                Error_Message.innerHTML=error;
+                return false;
+            }
+            return false;
+        }
+    </script>
+</body>
+</html>

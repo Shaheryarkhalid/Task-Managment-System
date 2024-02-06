@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0; 
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        section.Main-Section{
+            height: 100vh;
+            width: 100%;
+            background-color: #0a9196;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .Main-Section .Content-Wrapper{
+            width: 70%;
+            height:90vh;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius:5px;
+            padding: 30px;
+        }
+        .Main-Section .Content-Wrapper>span{
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 40px;
+            font-size: 1.5rem;
+            border-bottom: 1px solid #ccc;
+        }
+        .Main-Section .Content-Wrapper form{  
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .Main-Section .Content-Wrapper .row{
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .Main-Section .Content-Wrapper .Field{
+            display: flex;
+            width: 45%;
+            justify-content: space-between;
+        }
+        .Main-Section .Content-Wrapper .Field label{
+            font-size: clamp(0.5rem,5vw,1.2rem);
+        }
+        .Main-Section .Content-Wrapper .Field input, .Main-Section .Content-Wrapper .Field textarea, .Main-Section .Content-Wrapper .Field select{
+            width: 60%;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #ddd;
+            border: 1px solid #666;
+            resize: none;
+        }
+        .Main-Section .Content-Wrapper .Field input{
+            max-height: 35px;
+            
+        }
+        .Main-Section .Content-Wrapper .Field option{
+            height: 100px;
+        }
+        .Main-Section .Content-Wrapper .Field input::file-selector-button{
+            display: none;
+        }
+        .Main-Section .Content-Wrapper .Field input:focus, .Main-Section .Content-Wrapper .Field textarea:focus, .Main-Section .Content-Wrapper .Field select:focus{
+            outline: none;
+            border: 2px solid #0a9196;
+        }
+        .Main-Section .Content-Wrapper .Field.Submit-Field{
+            justify-content: flex-end;
+            width: 100%;
+        }
+        .Main-Section .Content-Wrapper .Field input.Submit{
+            width: 30%;
+            background-color: #0a9196;
+            color:#fff;
+            justify-self: center;
+            align-self: center;
+            cursor: pointer;
+            transition: all 0.3s linear;
+        }
+        .Main-Section .Content-Wrapper .Field input.Submit:hover{
+            background-color: #666;
+            transition: all 0.3s ease;
+        }
+        .Main-Section .Content-Wrapper .Field span.Error{
+            color: red;
+        }
+        
+    </style>
+</head>
+<body>
+    <section class="Main-Section">
+        <div class="Content-Wrapper">
+            <span>Add Task</span>
+            <form method="post" onsubmit="Add_Task(this); return false" >
+                <div class="row">
+                    <div class="Field">
+                        <label for="Task_Title">Task Title</label>
+                        <input type="text" name="Task_Title" id="Task_Title">
+                    </div>
+                    <div class="Field">
+                        <label for="Task_Description">Task Description</label>
+                        <textarea type="text" name="Task_Description" id="Task_Description"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="Field">
+                        <label for="Due_Date">Due Date</label>
+                        <input type="date" name="Due_Date" id="Due_Date">
+                    </div>
+                    <div class="Field">
+                        <label for="Priority">Priority</label>
+                        <select name="Priority" id="Priority">
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low" selected>Low</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="Field">
+                        <label for="Category_Project">Category/Project</label>
+                        <input type="text" name="Category_Project" id="Category_Project">
+                    </div>
+                    <div class="Field">
+                        <label for="Assigned_To">Assigned To</label>
+                        <select  name="Assigned_To" id="Assigned_To">
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="Field">
+                        <label for="Attachments">Attachments</label>
+                        <input type="file" name="Attachments" id="Attachments">
+                    </div>
+                    <div class="Field">
+                        <label for="Checklists">Checklists</label>
+                        <input maxlength="20" multiple type="text" name="Checklists" id="Checklists">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="Field">
+                        <label for="Comments_Notes">Comments/Notes</label>
+                        <input maxlength="27" type="text" name="Comments_Notes" id="Comments_Notes">
+                    </div>
+                    <div class="Field">
+                        <label for="Reminder_notification">Reminder/Notification</label>
+                        <input type="text" maxlength="27" name="Reminder_notification" id="Reminder_notification">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="Field">
+                        <label for="Estimated_Time">Estimated Time</label>
+                        <input type="text" maxlength="10" name="Estimated_Time" id="Estimated_Time">
+                    </div>
+                    <div class="Field">
+                        <label for="Dependencies">Dependencies</label>
+                        <input maxlength="30" type="text" name="Dependencies" id="Dependencies">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="Field">
+                        <label for="Progress">Progress </label>
+                        <select  name="Progress" id="Progress">
+                            <option selected value="0%">0%</option>
+                            <option value="25%">25%</option>
+                            <option value="50%">50%</option>
+                            <option value="75%">75%</option>
+                            <option value="100%">100%</option>
+                        </select>
+                    </div>
+                    <div class="Field">
+                        <label for="Recurring_Task">Recurring Task</label>
+                        <select name="Recurring_Task" id="Recurring_Task">
+                            <option value="Yes">Yes</option>
+                            <option selected value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="Field">
+                        <label for="Labels_Tags">Labels/Tags</label>
+                        <input maxlength="10" type="text" name="Labels_Tags" id="Labels_Tags">
+                    </div>
+                    <div class="Field">
+                        <label for="Custom_Fields">Custom Fields </label>
+                        <input maxlength="20" type="text" name="Custom_Fields" id="Custom_Fields">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="Field Submit-Field">
+                        <span id="Error" class="Error"></span>
+                        <input type="submit" name="Submit" id="Submit" class="Submit">
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    </section>
+    <script>
+        window.onload=()=>{
+             if(!sessionStorage.getItem("Signed_in")){window.location.replace("./Sign_in.html")}
+        }
+        (function Form_Setup()
+        {
+            let Users=JSON.parse(localStorage.getItem('Users'));
+            document.getElementById('Due_Date').min= new Date().toISOString().split("T")[0];
+            let Assigned_To= document.getElementById('Assigned_To');
+            
+            if(Users){
+                Users.forEach(element => {
+                    Assigned_To.innerHTML+=`<option>${element.Name}</option>`;
+                });
+            }
+        })();
+        function Add_Task(form){
+            let task={};
+            var Error_Span=document.getElementById("Error");
+            for(let i of form)
+            {
+                if(!(i.id === "Submit")){ task[i.id]=i.value;}
+            }
+            try{
+                if(task.Task_Title === ""){throw "Task Title Cannot be Empty";}
+                if(task.Task_Title.length > 15){throw "Task Title Should be less than 15 characters long";}
+            }catch(Error){
+                Error_Span.innerHTML=Error;
+                return;
+            }   
+            
+            try{
+                if(task.Task_Description === ""){throw "Task Description Cannot be Empty";}
+                if(task.Task_Description.length > 100){throw "Task Description Should be less than 100 characters long";}
+                Error_Span.innerHTML="";
+            }catch(Error){
+                Error_Span.innerHTML=Error;
+                return;
+            }
+
+            try{
+                if(task.Due_Date === ""){throw "Due Date Cannot be Empty";}
+                Error_Span.innerHTML="";
+            }catch(Error){
+                Error_Span.innerHTML=Error;
+                return;
+            }
+
+            try{
+                if(task.Category_Project === ""){throw "Catagory/Project Cannot be Empty";}
+                if(task.Category_Project.length > 15){throw "Catagory/Project Should be less than 15 characters long";}
+                Error_Span.innerHTML="";
+            }catch(Error){
+                Error_Span.innerHTML=Error;
+                return;
+            }   
+            let Tasks=JSON.parse(localStorage.getItem('Tasks'));
+            debugger;
+            if(task.Progress==="0%")
+            {
+                task.Status="Not Started";
+            }
+            else if(task.Progress==="25%"||task.Progress==="50%"||task.Progress==="75%")
+            {
+                task.Status="Pending";
+            }else if(task.Progress==="100%")
+            {
+                task.Status="Complete";
+
+            }
+            if(Tasks)
+            {
+                let N=(Tasks.length+1).toString();
+                Task_ID=N.padStart(10,0);
+                task.Task_ID=Task_ID;
+                Tasks.push(task);
+                localStorage.setItem('Tasks',JSON.stringify(Tasks));
+                window.location.replace('./index.html');
+            }else{
+                let N="1";
+                Task_ID=N.padStart(10,0);
+                task.Task_ID=Task_ID;
+                let arr=[];
+                arr.push(task);
+                localStorage.setItem('Tasks',JSON.stringify(arr));
+                window.location.replace('./index.html');
+            }
+        }
+    </script>
+</body>
+</html>

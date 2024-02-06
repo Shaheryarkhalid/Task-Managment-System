@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>   
+    <style>
+        *{
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        section.Main-Section{
+            height: 100vh;
+            width: 100%;
+            background-color: #0a9196;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .Main-Section .Content-Wrapper{
+            width:95%;
+            height: 95vh;
+            background-color: transparent;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .Main-Section .Content-Wrapper .Left_Section .top-section{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .Main-Section .Content-Wrapper .Left_Section.Back{
+            width: 100%;
+            text-align: center;
+        }
+        .Main-Section .Content-Wrapper .Left_Section .Back a{
+            padding:10px 20px;
+            text-decoration: none;
+            color:#fff;
+            background-color: #0a9196;
+            border-radius: 10px;
+            
+        }
+        .Main-Section .Content-Wrapper .Section-Style{
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px #777;
+        }
+        .Main-Section .Content-Wrapper .Left_Section{
+            width: 74%;
+            padding: 20px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .Main-Section .Content-Wrapper .Left_Section .Header{
+            width: 70%;
+            margin-top: 5px;
+        }
+        .Main-Section .Content-Wrapper .Left_Section .Header h1{
+            font-size:2rem;
+            font-weight: 400;
+            padding:10px 0;
+        }
+        .Main-Section .Content-Wrapper .Left_Section .Header p{
+            padding:10px 0;
+            letter-spacing: 0.02rem;
+        }
+        .Main-Section .Content-Wrapper .Left_Section .Actions{
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            padding: 20px 0;
+            border-bottom: 1px solid #0a9196;
+        }
+        .Main-Section .Content-Wrapper .Left_Section .Actions span p{
+            padding:10px 0;
+            background-color: #ddd;
+            border-radius:5px;
+            font-size: 0.9rem;
+        }
+        .Main-Section .Content-Wrapper .Left_Section .Actions span {
+            text-align: center;
+            background-color: #ddd;
+            padding: 10px;
+            border-radius: 10px;
+            width: 17%;
+        }
+        .Main-Section .Content-Wrapper .Left_Section .Actions button{
+            padding:0 30px;
+            height: 50%;
+            align-self: center;
+            background-color: #0a9196;
+            border-radius:5px;
+            border:  none;
+            cursor: pointer;
+            color:#fff;
+        }
+        .Main-Section .Content-Wrapper .Left_Section .Other-Details{
+            height: 50%;
+            width: 100%;
+            padding: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap:10px;
+            justify-content: space-evenly;
+        }
+        .Main-Section .Content-Wrapper .Left_Section .Other-Details span{
+            padding: 20px;
+            background-color: #0a9196;
+            box-shadow: 0 0 5px #555;
+            border-radius: 10px;
+            width:23%;
+            font-size: 0.8rem;
+            color:#000;
+            
+        }
+        .Main-Section .Content-Wrapper .Left_Section .Other-Details span p{
+            width: 100%;
+            height: 40%;
+            padding-top: 5px;
+            text-align: center;
+            color: #fff;
+        }
+        .disabled{
+            cursor: not-allowed !important;
+            background-color: #acbfc0 !important;
+            color: #000 !important;
+        }
+        .Delete{
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 40px;
+            border: none;
+            background-color:#f70000;
+            color:#fff;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        .Delete:hover {
+            background-color:#8f2d2d;
+        }
+
+
+
+
+
+
+
+
+
+
+
+        .Main-Section .Content-Wrapper .Right_Section{
+            width: 25%;
+            
+        }
+        
+    </style>
+</head>
+<body>
+    <section class="Main-Section">
+        <div class="Content-Wrapper">
+            <div class="Left_Section Section-Style">
+                <div class="Back">
+                    <a href="./index.html"><=</a>
+                </div>
+                <div class="top-section">
+                    <div class="Header">
+                        <h1 id="Task_Title">Not Found</h1>
+                        <p id="Task_Description"></p>
+                    </div>
+                </div>
+                
+                <div class="Actions">
+                    <span id="Due_Date">Due Date</span>
+                    <span id="Priority">Priority</span>
+                    <span id="Progress">Progress</span>
+                    <span id="Status">Status</span>
+                    <span style="font-size: 0.9rem; display: flex; flex-direction: column; justify-content: space-evenly;">Update Progress
+                        <select id="Progress_Update" style="display: block; text-align: center; border-radius: 5px;">
+                            <option id="0%" value="0%">0%</option>
+                            <option id="25%" value="25%">25%</option>
+                            <option id="50%" value="50%">50%</option>
+                            <option id="75%" value="75%">75%</option>
+                            <option id="100%" value="100%">100%</option>
+                        </select>
+                    </span>
+                    <button class="disabled" onclick="Update()" id="Update_Task" type="button" disabled>Save</button>
+                </div>
+                <div class="Other-Details">
+                    <span id="Assigned_To">Assigned to: </span>
+                    <span id="Attachments">Attachments: </span>
+                    <span id="Category_Project">Catagory/Project: </span>
+                    <span id="Checklist">Checklist: </span>
+                    <span id="Notes">Notes: </span>
+                    <span id="Custom_Fields">Custom Fields: </span>
+                    <span id="Dependencies">Dependencies: </span>
+                    <span id="Estimated_Time">Estimated Time: </span>
+                    <span id="Labels_Tags">Labels/Tags: </span>
+                    <span id="Recurring">Recurring: </span>
+                    <span id="Reminder_Notification">Reminder/Notification: </span>
+                </div>
+                <button class="Delete" id="Delete" onclick="Delete()">Delete</button>
+            </div>
+            <div class="Right_Section Section-Style">
+
+            </div>
+        </div>
+    </section>
+    <script>
+        (()=>{
+            debugger;
+            if(!sessionStorage.getItem("Signed_in")){window.href("./Sign_in.html")}
+            if(!sessionStorage.getItem("Manager")){ document.getElementById("Delete").setAttribute("class","disabled Delete");}
+            if(!(sessionStorage.getItem("Manager")) && !(sessionStorage.getItem("Team Lead"))){ document.getElementById("Progress_Update").setAttribute("style","display:none",);}
+            
+        })();
+        (()=>{
+            let All_Task=JSON.parse(localStorage.getItem('Tasks'));
+            let Current_Task=new Object();
+            let Url=window.location.href;
+            let Current_Task_Id=Url.split("#")[1];
+            All_Task.forEach(element => {
+                    if(element.Task_ID === Current_Task_Id){ Current_Task=element};
+            });
+            console.log(Current_Task);
+            document.getElementById("Task_Title").innerHTML=Current_Task.Task_Title;
+            document.getElementById("Task_Description").innerHTML=Current_Task.Task_Description;
+            document.getElementById("Assigned_To").innerHTML+=`<p class="fas fa-user"> ${Current_Task.Assigned_To}</p>`;
+            document.getElementById("Attachments").innerHTML+=`<p> ${Current_Task.Attachments} </p>`;
+            document.getElementById("Category_Project").innerHTML+=`<p> ${Current_Task.Category_Project} </p>`;
+            document.getElementById("Checklist").innerHTML+=`<p> ${Current_Task.Checklists} </p>`;
+            document.getElementById("Notes").innerHTML+=`<p> ${Current_Task.Comments_Notes} </p>`;
+            document.getElementById("Custom_Fields").innerHTML+=`<p> ${Current_Task.Custom_Fields} </p>`;
+            document.getElementById("Dependencies").innerHTML+=`<p> ${Current_Task.Dependencies} </p>`;
+            document.getElementById("Estimated_Time").innerHTML+=`<p> ${Current_Task.Estimated_Time} </p>`;
+            document.getElementById("Labels_Tags").innerHTML+=`<p> ${Current_Task.Labels_Tags} </p>`;
+            document.getElementById("Recurring").innerHTML+=`<p> ${Current_Task.Recurring_Task} </p>`;
+            document.getElementById("Reminder_Notification").innerHTML+=`<p> ${Current_Task.Reminder_notification} </p>`;
+            document.getElementById("Due_Date").innerHTML+=`<p style="background-color:#fff"> ${Current_Task.Due_Date} </p>`;
+            {
+                if(Current_Task.Progress==="0%"){
+                    document.getElementById("Progress").innerHTML+=`<p style="background-color:#f70000; color:#fff"> ${Current_Task.Progress} </p>`;
+                    document.getElementById("0%").setAttribute("selected","");
+                    document.getElementById("Delete").setAttribute("class","disabled Delete");
+                }
+                if(Current_Task.Progress==="25%"){
+                    document.getElementById("Progress").innerHTML+=`<p style="background-color:#f7a200; color:#fff"> ${Current_Task.Progress} </p>`;
+                    document.getElementById("25%").setAttribute("selected","");
+                    document.getElementById("Delete").setAttribute("class","disabled Delete");
+                }
+                if(Current_Task.Progress==="50%"){
+                    document.getElementById("Progress").innerHTML+=`<p style="background-color:#f7ec00; color:#fff"> ${Current_Task.Progress} </p>`;
+                    document.getElementById("50%").setAttribute("selected","");
+                    document.getElementById("Delete").setAttribute("class","disabled Delete");
+                }
+                if(Current_Task.Progress==="75%"){
+                    document.getElementById("Progress").innerHTML+=`<p style="background-color:#9ef700; color:#fff"> ${Current_Task.Progress} </p>`;
+                    document.getElementById("75%").setAttribute("selected","");
+                    document.getElementById("Delete").setAttribute("class","disabled Delete");
+                }
+                if(Current_Task.Progress==="100%"){
+                    document.getElementById("Progress").innerHTML+=`<p style="background-color:#2bb400; color:#fff"> ${Current_Task.Progress} </p>`;
+                    document.getElementById("100%").setAttribute("selected","");
+                }
+            }
+            {
+                if(Current_Task.Priority==="High"){document.getElementById("Priority").innerHTML+=`<p style="background-color:#f70000; color:#fff"> ${Current_Task.Priority} </p>`;}
+                if(Current_Task.Priority==="Medium"){document.getElementById("Priority").innerHTML+=`<p style="background-color:#f7a200; color:#fff"> ${Current_Task.Priority} </p>`;}
+                if(Current_Task.Priority==="Low"){document.getElementById("Priority").innerHTML+=`<p style="background-color:#2bb400; color:#000"> ${Current_Task.Priority} </p>`;}    
+            }
+            {
+                if(Current_Task.Status==="Not Started"){document.getElementById("Status").innerHTML+=`<p style="background-color:#f70000; color:#fff"> ${Current_Task.Status} </p>`;}
+                if(Current_Task.Status==="Pending"){document.getElementById("Status").innerHTML+=`<p style="background-color:#f7a200; color:#fff"> ${Current_Task.Status} </p>`;}
+                if(Current_Task.Status==="Complete"){document.getElementById("Status").innerHTML+=`<p style="background-color:#2bb400; color:#000"> ${Current_Task.Status} </p>`;}    
+            }
+        })();
+        document.getElementById("Progress_Update").onchange=(event)=>{
+            let att=document.getElementById("Update_Task")
+            att.setAttribute("class","");
+            att.removeAttribute("disabled");
+        }
+        function Update(){
+            let Url=window.location.href;
+            let Current_Task_Id=Url.split("#")[1];
+            let All_Task=JSON.parse(localStorage.getItem('Tasks'));
+            let Updated=document.getElementById("Progress_Update").value;
+            All_Task.forEach(element => {
+                    if(element.Task_ID === Current_Task_Id){
+                         element.Progress=Updated; 
+                         if(Updated==="100%")
+                         {
+                            element.Status="Complete"
+                         }else if(Updated==="0%"){
+                            element.Status="Not Started"
+                        }else{
+                             element.Status="Pending"
+                         }
+
+                         localStorage.setItem('Tasks', JSON.stringify(All_Task));
+                         window.location.reload();
+                        }
+            });
+        }   
+        function Delete()
+        {
+            let Url=window.location.href;
+            let Current_Task_Id=Url.split("#")[1];
+            let All_Task=JSON.parse(localStorage.getItem('Tasks'));
+            for(let element in All_Task){
+                if(All_Task[element].Task_ID===Current_Task_Id)
+                {
+                    All_Task.splice(element,1);
+                }
+            }
+            localStorage.setItem('Tasks',JSON.stringify(All_Task));
+            window.location.replace('./index.html');
+        }
+    </script>
+</body>
+</html>

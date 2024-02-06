@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Managment</title>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>   
+</head>
+<body>
+    <section class="Main-Section">
+        <div class="Content-Wrapper">
+            <div class="Top-Section">
+                <div class="Left_Section">
+                    <span >Tasks</span>
+                    <a href="./Add_Task.html">Add Task</a>
+                </div>
+                <div class="Right_Section">
+                    <i class="fas fa-user"></i>
+                    <span id="User_Name">User Name</span>
+                    <button onclick="Logout()" >Log Out</button>
+                </div>
+            </div>
+            <div class="Bottom-Section">
+                <label for="Sort">Sort By: </label>
+                <select id="Sort" name="Sort" class="Sort">
+                    <option selected>Assigned To Me</option>
+                    <option>Priority</option>
+                    <option>Status</option>
+                </select>
+                <div class="Task-Container">
+                    <table id="Task_Table">
+                        <thead>
+                            <tr>
+                                <th>Task Name</th>
+                                <th>Assigned To</th>
+                                <th>Due Date</th>
+                                <th>Priority</th>
+                                <th >Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="Table_Body">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="./index.js"></script>
+</body>
+</html>

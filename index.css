@@ -1,0 +1,122 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+section.Main-Section{
+    width: 100%;
+    min-height: 100vh;
+    background-color: #0a9196;
+    display: flex;
+    justify-content: center;
+}
+.Main-Section .Content-Wrapper{
+    height: 100%;
+    width: 80%;
+    padding: 20px;
+    position: relative;
+    top:40px;
+    background-color: #fff;
+    border-radius: 20px;
+}
+.Main-Section .Content-Wrapper .Top-Section{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+    border-bottom: 1px solid #ddd;
+}
+.Main-Section .Content-Wrapper .Top-Section .Left_Section span{
+    font-size: 2rem;
+    padding-right: 20px;
+}
+.Main-Section .Content-Wrapper .Top-Section .Left_Section a{
+    padding:15px 20px;
+    background-color: #0a9196;
+    border-radius: 10px;
+    text-decoration: none;
+    color:#fff
+}
+.Main-Section .Content-Wrapper .Top-Section .Right_Section{
+    align-self: flex-end;
+}
+.Main-Section .Content-Wrapper .Top-Section .Right_Section #User_Name{
+    padding-left: 5px;
+    font-size: 1.2rem;
+}
+.Main-Section .Content-Wrapper .Top-Section .Right_Section button{
+    padding:10px 20px;
+    background-color: #0a9196;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #fff;
+}
+.Main-Section .Content-Wrapper .Bottom-Section{
+    
+}
+.Main-Section .Content-Wrapper .Bottom-Section label{
+    font-size: 1.2rem;
+    margin-left:40px ;
+}
+.Main-Section .Content-Wrapper .Bottom-Section .Sort{
+    margin-top: 20px;
+    padding:10px 20px;
+    border-radius: 10px;
+}
+.Main-Section .Content-Wrapper .Bottom-Section .Task-Container{
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #ccc;
+    font-size: 1.2rem;
+}
+.Main-Section .Content-Wrapper .Bottom-Section .Task-Container table{
+    width: 100%;
+}
+.Main-Section .Content-Wrapper .Bottom-Section .Task-Container table tr{
+    background-color: #fff;
+}
+.Main-Section .Content-Wrapper .Bottom-Section .Task-Container table tr:hover{
+    background-color: #ddd;
+}
+.Main-Section .Content-Wrapper .Bottom-Section .Task-Container table th{
+    background-color: #0a9196;
+    padding: 20px;
+    border-radius: 5px;
+    color: #fff;
+    user-select: none;
+}
+
+.Main-Section .Content-Wrapper .Bottom-Section .Task-Container table td{
+    padding: 20px;
+    border-radius: 5px;
+}
+.Main-Section .Content-Wrapper .Bottom-Section .Task-Container table td:last-child{
+    text-align: center;
+}
+.Main-Section .Content-Wrapper .Bottom-Section .Task-Container table td a{
+    padding:15px 30px;
+    background-color: rebeccapurple;
+    border-radius: 5px;
+    text-decoration: none;
+    color:#fff
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

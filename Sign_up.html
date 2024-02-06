@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0; 
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        section.Main-Section{
+            height: 100vh;
+            width: 100%;
+            background-color: #0a9196;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .Main-Section .Content-Wrapper{
+            width: 40%;
+            height:80vh;
+            padding: 40px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius:5px;
+        }
+        
+        .Main-Section .Content-Wrapper span{
+            padding: 10px 5px;
+            font-size: 1.5rem;
+            width:100%;
+            border-bottom: 1px solid #ddd;
+        }
+        .Main-Section .Content-Wrapper form{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            padding: 20px;
+        }
+        .Main-Section .Content-Wrapper form label{
+            font-size:clamp(1rem,10vw,1rem);
+            padding: 10px 0;
+            font-weight: 500;
+        }
+        .Main-Section .Content-Wrapper form input, .Main-Section .Content-Wrapper form select{
+            width: 30vw;
+            padding:10px;
+            border-radius: 0;
+            border: 1px solid #888;
+            background-color: #ddd;
+            font-size: 1rem;
+            border-radius: 4px;
+        }
+        .Main-Section .Content-Wrapper form input:focus{
+            border: 1px solid #1a42f8;
+            outline: none;
+        }
+        .Main-Section .Content-Wrapper form input.Submit{
+            width: 15vw;
+            background-color: #0a9196;
+            color:#fff;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 15px;
+            transition: all 0.3s linear;
+        }
+        .Main-Section .Content-Wrapper form input.Submit:hover{
+            color:#555;
+            background-color: #ccc;
+            transition: all 0.3s ease;
+        }
+        .Main-Section .Content-Wrapper form .Error-Message{
+            color:#f00;
+            font-size:clamp(0.3rem,3vw,1rem);
+            text-align: center;
+            border: none;
+        }
+        .Submit-Signin{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .Submit-Signin p{
+            padding-top: 10px;
+            padding-left: 10px;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <section class="Main-Section">
+        <div class="Content-Wrapper">
+            <span>Sign up</span>
+            <form method="post" onsubmit="return Form_Validation()" >
+                <label for="Name">Name</label>
+                <input type="text" name="Name" id="Name">
+
+                <label for="Email">Email</label>
+                <input type="email" name="Email" id="Email">
+                
+                <label for="Position">Position</label>
+                <select name="Position" id="Position" class="Position">
+                    <option value="Manager">Manager</option>
+                    <option value="Team Lead">Team Lead</option>
+                    <option value="Developer">Developer</option>
+                    <option selected value="Designer">Designer</option>
+                </select>
+
+                <label for="Password">Password</label>
+                <input type="password" name="Password" id="Password">
+
+                <label for="Confirm-Password">Confirm Password</label>
+                <input type="password" name="Confirm-Password" id="Confirm-Password">
+
+                <span class="Error-Message" id="Error-Message"></span>
+                <div class="Submit-Signin">
+                    <input type="submit" value="Submit" class="Submit">
+                    <p>Already Have Account <a href="./Sign_in.html">Sign in</a></p>
+                </div>
+            </form>
+            
+        </div>
+    </section>
+    <script>
+        window.onload=()=>{
+             if(sessionStorage.getItem("Signed_in")){window.location.replace("./index.html")}
+        }
+        function Form_Validation()
+        {
+            var Name=document.getElementById("Name").value;
+            var Email=document.getElementById("Email").value;
+            var Position=document.getElementById("Position").value;
+            var Password=document.getElementById("Password").value;
+            var Confirm_Password=document.getElementById("Confirm-Password").value;
+            var Error_Message=document.getElementById("Error-Message");
+
+            try{
+                if(Name.trim()==""){ throw "Name Cannot Be Empty..."}
+                if(Name.length<5 || Name.length>15 ){ throw "Name Should Be 5-15 Characters Long..."}
+                Error_Message.innerHTML="";
+                
+            }catch(error){
+                Error_Message.innerHTML=error;
+                return false;
+            }
+            try{
+                if(Email.trim()==""){ throw "Email Cannot Be Empty..."}
+                Error_Message.innerHTML="";
+                
+            }catch(error){
+                Error_Message.innerHTML=error;
+                return false;
+            }
+            try{
+                let reg=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+                if(Password.trim()=="") throw "Password Cannot be empty";
+                if(Password.length<8) throw "Password length Should be atleast 8 characters long";
+                if(!reg.test(Password)) throw "Password Should Contain atleast one letter one special character and atleast one number";
+                Error_Message.innerHTML="";
+            }catch(error){
+                Error_Message.innerHTML=error;
+                return false;
+            }
+            try{
+                if(Confirm_Password.trim()==""){ throw "Confirm Password Cannot Be Empty..."}
+                if(Confirm_Password.trim() !== Password.trim()){ throw "Password and Confirm Password Should be Same..."}
+                Error_Message.innerHTML="";
+                
+            }catch(error){
+                Error_Message.innerHTML=error;
+                return false;
+            }
+            
+            if(Position==="Manager"){sessionStorage.setItem("Manager",true)}
+            if(Position==="Team Lead"){sessionStorage.setItem("Team Lead",true)}
+            
+            let Users={Name:Name, Email:Email, Position:Position, Password:Password};
+            debugger;
+            let Users_Table=JSON.parse(localStorage.getItem('Users'));
+            if(Users_Table){
+                let N=(Users_Table.length+1).toString();
+                let User_Id= N.padStart(10,0);
+                Users.User_Id=User_Id;
+                Users_Table.push(Users);
+                localStorage.setItem('Users',JSON.stringify(Users_Table));
+                sessionStorage.setItem("Signed_in",User_Id);
+                window.location.replace("./index.html");
+            }else{
+                let N="1";
+                let User_Id= N.padStart(10,0);
+                Users.User_Id=User_Id;
+                let Arr=[];
+                Arr.push(Users);
+                localStorage.setItem('Users',JSON.stringify(Arr));
+                sessionStorage.setItem("Signed_in",User_Id);
+                window.location.replace("./index.html");
+            }
+            return false;
+        }
+    </script>
+</body>
+</html>
